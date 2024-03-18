@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ParamController.java&apos; to &apos;test1/src/main/java/net.kdigital.test1.controller&apos;&#x0D;&#x0A;- Original project: &apos;spring3&apos;&#x0D;&#x0A;- Destination element: &apos;test1/src/main/java/net.kdigital.test1.controller&apos;&#x0D;&#x0A;- Original element: &apos;net.kdigital.spring3.controller.ParamController.java&apos;" description="Copy compilation unit" destination="=test1/src\/main\/java=/gradle_scope=/main=/=/gradle_used_by_scope=/main,test=/&lt;net.kdigital.test1.controller" element1="/src\/main\/java=/gradle_scope=/main=/=/gradle_used_by_scope=/main,test=/&lt;net.kdigital.spring3.controller{ParamController.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1709190459626" units="1" version="1.0"/>
+</session>

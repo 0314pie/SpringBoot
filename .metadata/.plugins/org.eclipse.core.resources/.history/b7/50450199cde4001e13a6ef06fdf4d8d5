@@ -1,0 +1,18 @@
+package net.kdigital.board.repository;
+
+import java.util.List;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import net.kdigital.board.entity.BoardEntity;
+
+public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
+	
+	// 검색기능이 있는 메소드 선언
+	List<BoardEntity> findByBoardTitleContaining(String searchWord, PageRequest pageRequest);
+	List<BoardEntity> findByBoardWriterContaining(String searchWord, PageRequest pageRequest);
+	List<BoardEntity> findByBoardContentContaining(String searchWord, PageRequest pageRequest);
+
+}

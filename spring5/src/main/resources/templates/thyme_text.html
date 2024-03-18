@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thymeleaf text 출력</title>
+</head>
+<body>
+    <h2>[ Thymeleaf text 출력 ]</h2>
+    <div>
+        <a th:href="@{/}"><img th:src="@{/images/home.png}" alt="logo"></a>
+    </div>
+
+    <h3>1. 문자출력</h3>
+    <p>한글: <span th:text="${korean}">한글</span></p>
+    <p>영어: <span th:text="${english}">영어</span></p>
+    <p>나이: <span th:text="${age}">정수</span></p>
+    <p>원주율: <span th:text="${pi}">실수</span></p>
+    <p>태그: <span th:text="${tag}">태그</span></p> <!-- 태그가 글씨로 표현됨 -->
+    <p>태그: <span th:utext="${tag}">태그</span></p> <!-- 태그가 태그로 인식함 -->
+    <p>URL: <span th:text="${url}">네이버</span></p> 
+    <p>URL: <a th:href="${url}">네이버</a></p>
+
+    <hr>
+    <h3>2. 태그 안쪽에 Thymeleaf 문법 사용 시</h3>
+    <p>한글: [[ ${korean} ]]</p>
+    <p>한글: ${korean} </p>
+
+    <hr>
+    <h3>3. 객체데이터(FriendDTO) 꺼내기(초기화되지 않은 데이터)</h3>
+    <p>전체데이터: [[ ${ f1 } ]]</p>
+    <p>이름: [[ ${ f1.fname } ]]</p>
+    <p>전화번호: [[ ${ f1.phone } ]]</p>
+    <p>나이: [[ ${ f1.age } ]]</p>
+    <p>생년월일: [[ ${ f1.birthday } ]]</p>
+    <p>성향: [[ ${ f1.active } ]]</p>
+
+    <hr>
+    <h3>4. 객체데이터(FriendDTO) 꺼내기(초기화된 데이터)</h3>
+    <p>전체데이터: <span th:text="${f2}">삼장법사</span></p>
+    <p>이름: <span th:text="${f2.fname}">삼장법사</span></p>
+    <p>전화번호: <span th:text="${f2.phone}">삼장법사</span></p>
+    <p>나이: <span th:text="${f2.age}">삼장법사</span></p>
+    <p>생년월일: <span th:text="${f2.birthday}">삼장법사</span></p>
+    <p>성향: <span th:text="${f2.active}">삼장법사</span></p>
+
+    <hr>
+    <h3>5. 객체데이터(FriendDTO) 꺼내기-2(초기화된 데이터)</h3>
+    <p th:object="${f3}">
+        이름: <span th:text="*{fname}">사오정</span><br>
+        전화번호: <span th:text="*{phone}">사오정</span><br>
+        나이: <span th:text="*{age}">사오정</span><br>
+        생년월일: <span th:text="*{birthday}">사오정</span><br>
+        성향: <span th:text="*{active}">사오정</span><br>
+    </p>
+
+    <hr>
+    <h3>6. 숫자 데이터 출력(일반)</h3>
+    <p>
+        정수: <span th:text="${n1}">정수</span><br>
+        실수: <span th:text="${n2}">실수</span><br>
+        실수: <span th:text="${n3}">실수</span><br>
+    </p>    
+    
+    <hr>
+    <h3>7. 숫자 데이터 출력(포멧팅)</h3>
+    <p>
+        정수: <span th:text="${#numbers.formatInteger(n1, 10)}">정수</span><br>
+        정수: <span th:text="${#numbers.formatInteger(n1, 3, 'COMMA')}">정수</span><br>
+        실수: <span th:text="${#numbers.formatDecimal(n2, 3, 'COMMA', 3, 'POINT')}">실수</span><br>
+        실수: <span th:text="${#numbers.formatDecimal(n3, 3, 'COMMA', 4, 'POINT')}">실수</span><br>
+        백분율: <span th:text="${#numbers.formatPercent(n4, 0, 5)}">실수</span><br>
+        백분율: <span th:text="${#numbers.formatPercent(n4, 2, 2)}">실수</span><br>
+        백분율: <span th:text="${#numbers.formatPercent(n4, 0, 0)}">실수</span><br>
+        
+    </p>    
+    
+    <hr>
+    <h3>8. 날짜 데이터 출력(일반)</h3>
+    <p>
+        Date:           <span th:text = "${date}">Date</span> <br>
+        Calendar:       <span th:text = "${calendar}">Calendar</span> <br>
+        LocalDate:      <span th:text = "${localDate}">LocalDate</span> <br>
+        LocalDateTime:  <span th:text = "${today}">LocalDateTime</span>
+    </p>
+
+    <hr>
+    <h3>9. 날짜 데이터 출력(포멧팅)</h3>
+    <p>
+        Date:           <span th:text = "${#dates.format(date,'yyyy년 MM월 dd일 hh시 mm분')}">Date</span> <br>
+        Calendar:       <span th:text = "${#calendars.format(calendar,'yyyy/MM/dd hh:mm')}">Calendar</span> <br>
+        LocalDate:      <span th:text = "${#temporals.format(localDate, 'yyyy-MM-dd HH:mm')}">LocalDate</span> <br>
+        LocalDateTime:  <span th:text = "${#temporals.format(today, 'yyyy-MM-dd HH:mm')}">LocalDateTime</span>
+    </p>
+    
+
+</body>
+</html>

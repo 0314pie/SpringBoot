@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;spring1/README.md&apos; to &apos;README.txt&apos;" description="Rename resource &apos;README.md&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="README.md" name="README.txt" stamp="1709176711113" updateReferences="true"/>
+</session>

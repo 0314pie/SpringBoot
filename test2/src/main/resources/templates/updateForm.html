@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xlmns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방명록 정보 수정</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>[ 방명록 정보 수정 ]</h2>
+    <div>
+        <a th:href="@{/}"><img th:src="@{/images/home.png}" alt="logo"></a>
+    </div>
+
+    <form th:action="@{/updateProc}" method="POST" th:object="${guestBookDTO}">
+        <input type="hidden" name="friendSeq" th:field="*{guestSeq}">
+        <label for="gname">
+            이름:
+            <input type="text" id="fname" name="fname" placeholder="이름입력" th:field="*{gname}">
+            <span class="error" th:errors="*{gname}"></span>
+        </label><br>
+        <label for="pwd">
+            비밀번호:
+            <input type="text" id="pwd" name="pwd" placeholder="비밀번호입력" th:value="*{pwd}">
+            <span class="error" th:errors="*{pwd}"></span>
+
+        </label><br>
+        <label for="text">
+            방명록:
+            <textarea name="text" id="text" cols="30" rows="10" th:field="*{text}"></textarea>
+            <span class="error" th:errors="*{text}"></span>
+        </label><br>
+
+        <input type="submit" value="수정">
+        <input type="reset" value="초기화">
+
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko" xlmns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>친구 정보 등록</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>[ 친구 정보 등록 ]</h2>
+    <div>
+        <a th:href="@{/}"><img th:src="@{/images/home.png}" alt="logo"></a>
+    </div>
+
+    <form th:action="@{/insert}" method="POST" th:object="${friendDTO}">
+        <label for="fname">
+            이름:
+            <input type="text" id="fname" name="fname" placeholder="이름입력" th:field="*{fname}">
+            <span class="error" th:errors="*{fname}"></span>
+        </label><br>
+        <label for="age">
+            나이:
+            <input type="text" id="age" name="age" placeholder="나이입력" th:field="*{age}">
+            <span class="error" th:errors="*{age}"></span>
+        </label><br>
+        <label for="phone">
+            전화번호:
+            <input type="text" id="phone" name="phone" placeholder="전화번호입력" th:field="*{phone}">
+            <span class="error" th:errors="*{phone}"></span>
+        </label><br>
+        <label for="birthday">
+            생년월일:
+            <input type="date" id="birthday" name="birthday" th:value="*{birthday}">
+            <span class="error" th:errors="*{birthday}"></span>
+        </label><br>
+        <label for="active">
+            성향:
+            <input type="radio" name="active" value="1" checked>외향적
+            <input type="radio" name="active" value="0">내성적
+        </label><br>
+
+        <input type="submit" value="저장">
+        <input type="reset" value="초기화">
+
+    </form>
+</body>
+
+</html>

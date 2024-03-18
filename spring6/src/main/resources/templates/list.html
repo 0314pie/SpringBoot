@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>친구 목록</title>
+    <style>
+        .mystyle {
+            color: red;
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>[ 친구 목록 ]</h2>
+    <div>
+        <a th:href="@{/}"><img th:src="@{/images/home.png}" alt="logo"></a>
+    </div>
+    <p th:if="${#lists.isEmpty(list)}" class="mystyle">목록이 없습니다.</p>
+    <div th:unless="${#lists.isEmpty(list)}">
+        <table border="1">
+            <tr>
+                <th>번호</th>
+                <th>이름</th>
+                <th>나이</th>
+                <th>전화번호</th>
+                <th>생년월일</th>
+                <th>성향</th>
+                <th></th>
+            </tr>
+            <tr th:each="friend, status : ${list}">
+                <td th:text="${status.count}">번호</td>
+                <td th:text="${friend.fname}">이름</td>
+                <td th:text="${friend.age}">나이</td>
+                <td th:text="${friend.phone}">전화번호</td>
+                <td th:text="${friend.birthday}">생년월일</td>
+                <td th:text="${friend.active} ? '외향적' : '내성적'">성향</td>
+                <td>
+                    <input type="button" class="deleteOne" th:data_no="${friend.friendSeq}" value="삭제">
+                    <input type="button" class="updateOne" th:data_no="${friend.friendSeq}" value="수정">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <form id="sendOne" th:action="@{/deleteOne}" method="GET">
+        <input type="hidden" id="friendSeq" name="friendSeq" value="">
+    </form>
+
+    <!-- thymeleaf 사용시 js파일을 따로 만들면 안됨, html 내부에 스크립트 작성할 것  -->
+    <script th:inline="javascript">
+        let delBtns = document.getElementsByClassName("deleteOne");  // 배열로 반환
+        let updateBtns = document.getElementsByClassName("updateOne");
+
+
+        for (let i = 0; i < delBtns.length; ++i) {
+            delBtns[i].addEventListener('click', delFriend);
+            updateBtns[i].addEventListener('click', updateFriend);
+        }
+
+        // 친구정보 삭제 함수
+
+        function delFriend() {
+            let data_no = this.getAttribute("data_no");
+            document.getElementById("friendSeq").value = data_no;  // input 태그
+            document.getElementById("sendOne").action = 'deleteOne'
+            document.getElementById("sendOne").submit();  // form 태그
+        }
+
+        // 친구정보 수정 함수
+        function updateFriend() {
+            let data_no = this.getAttribute("data_no");
+            document.getElementById("friendSeq").value = data_no;  // input 태그
+            document.getElementById("sendOne").action = 'updateOne'
+            document.getElementById("sendOne").submit(); // form 태그
+        }
+    </script>
+</body>
+
+</html>

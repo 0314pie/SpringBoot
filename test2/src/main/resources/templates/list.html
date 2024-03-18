@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko" xlmns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방명록 전체보기</title>
+</head>
+
+<body>
+    <h2>[ 방명록 전체보기 ]</h2>
+    <div>
+        <a th:href="@{/}"><img th:src="@{/images/home.png}" alt="logo"></a>
+    </div>
+    <p th:if="${#lists.isEmpty(list)}">목록이 없습니다.</p>
+    <div th:unless="${#lists.isEmpty(list)}">
+        <table border="1">
+            <tr>
+                <th>번호</th>
+                <th>이름</th>
+                <th>비밀번호</th>
+                <th>방명록</th>
+                <th>등록일</th>
+                <th>삭제</th>
+            </tr>
+            <tr th:each="guestbook, status : ${list}">
+                <td th:text="${status.count}">번호</td>
+                <td th:text="${guestbook.gname}">이름</td>
+                <td th:text="${guestbook.pwd}">비밀번호</td>
+                <td th:text="${guestbook.text}">방명록</td>
+                <td th:text="${#temporals.format(guestbook.regdate,'yyyy/MM/dd HH:mm:ss')}">등록일</td>
+                <td>
+                    <input type="button" class="deleteOne" th:data_no="${guestbook.guestSeq}"
+                        th:pwd_no="${guestbook.pwd}" value="삭제">
+                    <input type="button" class="updateOne" th:data_no="${guestbook.guestSeq}" value="수정">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <form id="sendOne" th:action="@{/deleteOne}" method="GET">
+        <input type="hidden" id="guestSeq" name="guestSeq" value="">
+    </form>
+
+    <script th:inline="javascript">
+        let delBtns = document.getElementsByClassName("deleteOne");  // 배열로 반환
+        let updateBtns = document.getElementsByClassName("updateOne");
+
+        for (let i = 0; i < delBtns.length; ++i) {
+            delBtns[i].addEventListener('click', delGuest);
+            updateBtns[i].addEventListener('click', updateGuest);
+        }
+
+        // 친구정보 삭제 함수
+
+        function delGuest() {
+
+            const valid = prompt('비밀번호를 입력하세요');
+            let pwd_no = this.getAttribute("pwd_no");
+
+            const feedback = valid == pwd_no ? '삭제완료' : '다시 입력하세요';
+
+            if (valid == pwd_no) {
+                let data_no = this.getAttribute("data_no");
+                document.getElementById("guestSeq").value = data_no;  // input 태그
+                document.getElementById("sendOne").submit();  // form 태그
+                return;
+            }
+            console.log("삭제함수");
+            alert(feedback);
+        }
+
+        function updateGuest() {
+            let data_no = this.getAttribute("data_no");
+            document.getElementById("guestSeq").value = data_no;  // input 태그
+            document.getElementById("sendOne").action = 'updateOne'
+            document.getElementById("sendOne").submit(); // form 태그
+        }
+
+    </script>
+
+</body>
+
+</html>

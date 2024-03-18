@@ -1,0 +1,30 @@
+package net.kdigital.board.util;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class PageNavigator {
+	private final int pagePerGroup = 10;	// 그룹 당 페이지 수
+	private int pageLimit;					// 페이지 당 글의 개수
+	private int page;						// 사용자가 요청한 페이지
+	private int totalPages;					// 총 페이지 수(글의 수 222개 23페이지)
+	private int totalGroupCount;			// 총 그룹의 수
+	private int currentGroup;				// 요청한 페이지가 속한 그룹
+	private int startPageGroup;				// 현재 그룹의 첫 페이지
+	private int endPageGroup;				// 현재 그룹의 마지막 페이지
+
+	// <<  <  1 2 3 4 5 6 7 8 9 10  >  >>
+	public PageNavigator(int pageLimit, int page, int totalPages) {
+		// 멤버 초기화
+		this.pageLimit = pageLimit;
+		this.page = page;
+		this.totalPages = totalPages;
+		
+		// 총 그룹수 계산
+		''
+		totalGroupCount = totalPages / pagePerGroup; 
+		totalGroupCount += (totalPages % pagePerGroup == 0) ? 0 : 1;
+	}
+}

@@ -1,0 +1,33 @@
+package net.kdigital.board;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import net.kdigital.board.entity.BoardEntity;
+import net.kdigital.board.repository.BoardRepository;
+
+@SpringBootTest
+class Spring7ApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+	
+	@Autowired
+	private BoardRepository repository;
+	
+	@Test
+	void testInsertBoard() {
+		for(int i=0; i<11; ++i) {
+			BoardEntity b = new BoardEntity();
+			
+			b.setBoardWriter("마루치");
+			b.setBoardTitle("애국가 1절" + (i+1));
+			b.setBoardContent("동해물과 백두산이~");
+			
+			repository.save(b);
+		}
+	}
+
+}
